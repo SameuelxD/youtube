@@ -3,5 +3,33 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Open Sans', 'Oswald';
+}
+body{
+    font-family: 'Open Sans' , sans-serif;
+}
+.container-primary{  /* Container Padre */
+    width: 100%;
+    min-height: 100vh;  /* Creamos 2 columnas para el menu lateral de navegacion y el contenido principal de la pagina  */
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 90px 1fr;
+    grid-template-rows: 60px 1fr;
+    grid-template-areas: "header header"
+                          "nav main"; 
+    transition: all .3s ease;
+}
+.container-primary.check{
+    grid-template-columns: 300px 1fr ;
+}
+.container_header{
+    grid-area: header;      /* Container encabezado */
+    background-color: #fff;
+}
+.container_nav{
+    grid-area: nav;  /* Container barra menu lateral */
+    background-color: #ccc;
+}
+.container_main{
+    grid-area: main;    /* Container Contenido principal de la pagina */
+    background-color: #414141;
 }
