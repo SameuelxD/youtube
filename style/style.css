@@ -33,10 +33,11 @@ body{
     align-items: center;
     gap: 20px;
     grid-template-areas: "logo search_bar items";
-    align-self: center;
 }
 .container_header .item_logo{
     grid-area: logo;
+    display: flex;
+    align-items: center;
 }
 .container_header .item_logo .btn_bars{
     width: 50px;
@@ -102,6 +103,8 @@ body{
 }
 .items_header{
     grid-area: items;
+    display: flex;
+    align-items: center;
 }
 .container_header .items_header button{
     width: 40px;
@@ -118,14 +121,69 @@ body{
 .container_header .items_header button:hover{
     background-color: #E7E7E7;
 }
+.container_header .items_header .photo_channel{
+    width: 30px;
+    height: 30px;
+    display: inline-block;
+}
+.container_header .items_header .photo_channel img{
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 100%;
+}
 /* ----- Container barra menu lateral ----- */
 .container_nav{
     grid-area: nav;  
-    background-color: #ccc;
 }
-
-
-
+.container_nav a{
+    display: block;
+    padding: 15px 35px;
+    color: #000;
+    text-decoration: none;
+}
+.container_nav a:hover{
+    background-color: #E5E5E5;
+}
+.container_nav a .fa-solid{
+    color: #606060;
+    margin-right: 32px;
+    width: 20px;
+    text-align: center;
+}
+.container_nav .active{
+    background-color: #E5E5E5;
+    font-weight: bold;
+}
+.container_nav .active .fa-solid{
+    color: #ff0000;
+}
+.container_nav h2{
+    font-size: 20px;
+}
+.container_nav hr{
+    margin: 20px 0;
+    border: 1px solid #dfdfdf;
+}
+.container_nav .channels{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 15px;
+    gap: 32px;
+}
+.container_nav a img{
+    width: 13%;
+    height: auto;
+    object-fit: cover;
+    border-radius: 100%;
+}
+.container_nav .ch2{
+    position: relative;
+    right: 40px;
+}
 /* ----- Container Contenido principal de la pagina ----- */
 .container_main{
     grid-area: main;    
