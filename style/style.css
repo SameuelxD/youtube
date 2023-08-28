@@ -22,15 +22,25 @@ body{
 .container-primary.check{
     grid-template-columns: minmax(300px,18%) auto ;
     .container_nav a,.container_nav h2{
+        transition: all .3s ease;
         color: #000;
     }
     .container_nav h2{
         display: flex;
         justify-content: center;
         color: #000;
+        transition: all .3s ease;
+
     }
     .container_nav .channels{
         display: flex;
+        transition: all .3s ease;
+
+    }
+    .container_nav hr{
+        display: block;
+        transition: all .3s ease;
+
     }
 }  
 
@@ -156,6 +166,8 @@ body{
 }
 .container_nav a:hover{
     background-color: #E5E5E5;
+    color: #E5E5E5;
+
 }
 .container_nav a .fa-solid{
     color: #606060;
@@ -166,6 +178,7 @@ body{
 .container_nav .active{
     background-color: #E5E5E5;
     font-weight: bold;
+    color: #E5E5E5;
 }
 .container_nav .active .fa-solid{
     color: #ff0000;
@@ -177,6 +190,7 @@ body{
     display: none;
 }
 .container_nav hr{
+    display: none;
     margin: 20px 0;
     border: 1px solid #dfdfdf;
 }
@@ -184,21 +198,20 @@ body{
     width: 100%;
     height: 50px;
     display: none;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     font-size: 15px;
-    gap: 32px;
+    gap: 20px;
+    text-align: center;
 }
+
 .container_nav a img{
     width: 13%;
     height: auto;
     object-fit: cover;
     border-radius: 100%;
 }
-.container_nav .ch2{
-    position: relative;
-    right: 40px;
-}
+
 /* ----- Container Contenido principal de la pagina ----- */
 .container_main{
     grid-area: main;    
@@ -215,7 +228,7 @@ body{
 }
 .container_main .videos_main .video{
     width: 100%;
-    display: block;
+    display: flex;
 }
 .container_main .videos_main .video img{
     width: 100%;

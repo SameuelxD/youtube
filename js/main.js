@@ -14,3 +14,34 @@ checkWidth();
 window.addEventListener('resize',() => {
     checkWidth();
 });
+
+/* Api */
+async function DetailsChannel(){
+    const url = 'https://youtube138.p.rapidapi.com/channel/details/?id=UC8fkwsjcI_MhralEX1g4OBw&hl=en&gl=US';
+    const options = {
+	    method: 'GET',
+	    headers: {
+		    'X-RapidAPI-Key': 'b5d6ae1157mshc83ca00c923dfd1p189b47jsnb6077838a4a7',
+		    'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
+	    }
+    };
+    try {
+	    const response = await fetch(url, options);
+	    const result = await response.json();
+	    console.log(result);
+    } catch (error) {
+	    console.error(error);
+    }
+}
+DetailsChannel();
+
+
+const path="details";
+let buildAvatar=async()=>{
+    let petition=await fetch(`${path}.json`);
+    let res=await petition.json();
+    let selection=document.querySelector("#avatar");
+    selection.insertAdjacentHTML("beforeend", /* html */ `<img src=${res.avatar[2].url} alt="perfil">
+    `);
+}
+buildAvatar();
