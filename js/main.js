@@ -16,49 +16,75 @@ window.addEventListener('resize',() => {
 });
 
 /* Api */
-async function DetailsChannel(){
-    const url = 'https://youtube138.p.rapidapi.com/channel/details/?id=UC8fkwsjcI_MhralEX1g4OBw&hl=en&gl=US';
-    const options = {
-	    method: 'GET',
-	    headers: {
-		    'X-RapidAPI-Key': 'b5d6ae1157mshc83ca00c923dfd1p189b47jsnb6077838a4a7',
-		    'X-RapidAPI-Host': 'youtube138.p.rapidapi.com'
-	    }
-    };
-    try {
-	    const response = await fetch(url, options);
-	    const result = await response.json();
-	    console.log(result);
-    } catch (error) {
-	    console.error(error);
-    }
-}
-DetailsChannel();
 
 
-const path="details";
+
+const path1="details";
 const path2="videos";
 let buildAvatar=async()=>{
-    let petition=await fetch(`js/${path}.json`);
-    let res=await petition.json();
+    let petition1=await fetch(`js/${path1}.json`);
+    let res1=await petition1.json();
     let selection=document.querySelector("#avatar");
-    selection.insertAdjacentHTML("beforeend", /* html */ `<img src=${res.author.avatar[2].url} alt="perfil">
+    selection.insertAdjacentHTML("beforeend", /* html */ `<img src=${res1.author.avatar[2].url} alt="perfil">
     `);
 }
-buildAvatar();
+buildAvatar()
+/*async function listVideos() {
+    const [res1, res2] = await Promise.all([
+        fetch(`js/${path1}.json`).then(details => details.json()),
+        fetch(`js/${path2}.json`).then(videos => videos.json())
+    ]);
+
+    let selection = document.querySelector("#list_videos");
+
+    // Limpia el contenido existente en #list_videos
+    selection.innerHTML = "";
+
+    // Combina los resultados de res1 y res2 y mapea el contenido
+    let combinedData = res1.contents.concat(res2.contents);
+    let randomThumbnails = combinedData.map((values) => `
+         <div class="videos_main">
+            <a href="#" class="video"><img src="${values.video.thumbnails[3].url}" alt="videos"/></a>
+            <div class="information_videos">
+                    <a href="#" id="photo_channel"><img src="#" alt="videos"/></a>
+                    <a href="#" class="video_title">${values.video.title}</a>
+                    <a href="#" class="ch">CreativeCode</a>
+                    <a href="#" class="stats">${values.video.stats.views} views - ${values.video.publishedTimeText}</a>
+            </div> 
+        </div>
+    `).join("");
+
+    // Inserta los elementos en #list_videos
+    selection.insertAdjacentHTML("beforeend", randomThumbnails);
+}
+listVideos();*/
+
+
+
+
+
 async function listVideos() {
-    let petition = await fetch(`js/${path2}.json`);
-    let res = await petition.json();
+    let petition1=await fetch(`js/${path1}.json`);
+    let res1=await petition1.json();
+    let petition2 = await fetch(`js/${path2}.json`);
+    let res2 = await petition2.json();
     let selection = document.querySelector("#list_videos");
     
     // Limpia el contenido existente en #list_videos
     selection.innerHTML = "";
 
     // Obtiene un conjunto específico de miniaturas aleatorias
-    let randomThumbnails = res.contents.map((valores)=> `
+    let randomThumbnails = res2.contents.map((values)=> `
          <div class="videos_main">
-            <a href="#" class="video"><img src="${valores.video.thumbnails[3].url}" alt="videos"/></a>
+            <a href="view.html" class="video"><img src="${values.video.thumbnails[3].url}" alt="videos"/></a>
+            <div class="information_videos">
+                    <a href="#" id="photo_channel"><img src="${res1.author.avatar[2].url}" alt="avatar"/></a>
+                    <a href="#" class="video_title">${values.video.title}</a>
+                    <a href="#" class="ch">CreativeCode</a>
+                    <a href="#" class="stats">${values.video.stats.views} views - ${values.video.publishedTimeText}</a>
+            </div> 
         </div>
+
     `).join("");
     //let randomTitle = res.contents[random].video;
 
@@ -71,8 +97,25 @@ async function listVideos() {
 }
 
 listVideos();
+/*async function playingVideo(){
+    let petition1=await fetch(`js/${path1}.json`);
+    let res1=await petition1.json();
+    let petition2 = await fetch(`js/${path2}.json`);
+    let res2 = await petition2.json();
+    let selection = document.querySelector("#playing_video");
+    
+    // Limpia el contenido existente en #list_videos
+    selection.innerHTML = "";
 
-
+    // Obtiene un conjunto específico de miniaturas aleatorias
+    let playing_video = res2.contents.video.videoId/* html 
+    let video= <div class="playing_video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/izvodnnCvt0?si=q05MVhsSepC_QcKn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+        
+    selection.insertAdjacentHTML("beforeend", playing_video);       
+}
+playingVideo();*/
 
 /*let listVideos=async()=>{
     let random=Math.floor(Math.random() * 20)
