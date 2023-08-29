@@ -47,7 +47,6 @@ let buildAvatar=async()=>{
 }
 buildAvatar();
 async function listVideos() {
-    let random = Math.floor(Math.random() * 20);
     let petition = await fetch(`js/${path2}.json`);
     let res = await petition.json();
     let selection = document.querySelector("#list_videos");
@@ -56,23 +55,19 @@ async function listVideos() {
     selection.innerHTML = "";
 
     // Obtiene un conjunto específico de miniaturas aleatorias
-    let randomThumbnails = res.contents[random].video.thumbnails;
-    let randomTitle = res.contents[random].video;
-
-    // Construye los elementos HTML
-    let videosHTML = randomThumbnails.map((value) => `
-        <div class="videos_main">
-            <a href="#" class="video"><img src="${value.url}" alt="videos"/></a>
+    let randomThumbnails = res.contents.map((valores)=> `
+         <div class="videos_main">
+            <a href="#" class="video"><img src="${valores.video.thumbnails[3].url}" alt="videos"/></a>
         </div>
     `).join("");
-    let titleVideos = randomTitle.map((value)=>`
-        <div class="information_video">
-            <a href="#" class="title">${value.title}</a>
-        </div>
-    `).join("")
+    //let randomTitle = res.contents[random].video;
+
+    // Construye los elementos HTML
+       
+    
     // Inserta los elementos en #list_videos
-    selection.insertAdjacentHTML("beforeend", videosHTML);
-    selection.insertAdjacentHTML("beforeend",titleVideos)
+    selection.insertAdjacentHTML("beforeend", randomThumbnails);
+    //selection.insertAdjacentHTML("beforeend",titleVideos)
 }
 
 listVideos();
