@@ -37,11 +37,34 @@ DetailsChannel();
 
 
 const path="details";
+const path2="videos";
 let buildAvatar=async()=>{
-    let petition=await fetch(`${path}.json`);
+    let petition=await fetch(`js/${path}.json`);
     let res=await petition.json();
     let selection=document.querySelector("#avatar");
-    selection.insertAdjacentHTML("beforeend", /* html */ `<img src=${res.avatar[2].url} alt="perfil">
+    selection.insertAdjacentHTML("beforeend", /* html */ `<img src=${res.author.avatar[2].url} alt="perfil">
     `);
 }
 buildAvatar();
+let listVideos=async()=>{
+    let random=Math.floor(Math.random() * 20)
+    let petition=await fetch(`js/${path2}.json`);
+    let res=await petition.json();
+    let selection=document.querySelector("#list_videos");
+    selection.insertAdjacentHTML("beforeend", /* html */` 
+    <div class="videos_main">
+        ${res.contents[random].video.thumbnails.map((value) => /*html */`
+        <a href="#" class="video"><img src="${value.url}" alt=""></a>
+        `).join("")}
+        <div class="video_browser">
+            ${res.contents[random].video.map((value)=> /* html */`
+            <div class="information_video">        
+                <a href="view.html">${value.title}</a>
+                <p>${value.stats.views}</p>
+                <p>${value.publishedTimeText}</p>       
+            </div>`).join("")}
+        </div>
+    </div>
+    `);
+}
+listVideos();
