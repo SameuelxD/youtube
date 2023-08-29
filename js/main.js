@@ -46,25 +46,87 @@ let buildAvatar=async()=>{
     `);
 }
 buildAvatar();
-let listVideos=async()=>{
+async function listVideos() {
+    let random = Math.floor(Math.random() * 20);
+    let petition = await fetch(`js/${path2}.json`);
+    let res = await petition.json();
+    let selection = document.querySelector("#list_videos");
+    
+    // Limpia el contenido existente en #list_videos
+    selection.innerHTML = "";
+
+    // Obtiene un conjunto específico de miniaturas aleatorias
+    let randomThumbnails = res.contents[random].video.thumbnails;
+    let randomTitle = res.contents[random].video;
+
+    // Construye los elementos HTML
+    let videosHTML = randomThumbnails.map((value) => `
+        <div class="videos_main">
+            <a href="#" class="video"><img src="${value.url}" alt="videos"/></a>
+        </div>
+    `).join("");
+    let titleVideos = randomTitle.map((value)=>`
+        <div class="information_video">
+            <a href="#" class="title">${value.title}</a>
+        </div>
+    `).join("")
+    // Inserta los elementos en #list_videos
+    selection.insertAdjacentHTML("beforeend", videosHTML);
+    selection.insertAdjacentHTML("beforeend",titleVideos)
+}
+
+listVideos();
+
+
+
+/*let listVideos=async()=>{
     let random=Math.floor(Math.random() * 20)
     let petition=await fetch(`js/${path2}.json`);
     let res=await petition.json();
     let selection=document.querySelector("#list_videos");
-    selection.insertAdjacentHTML("beforeend", /* html */` 
+    selection.insertAdjacentHTML("beforeend", /* html  
     <div class="videos_main">
-        ${res.contents[random].video.thumbnails.map((value) => /*html */`
+        ${res.contents[random].video.thumbnails.map((value) => html `
         <a href="#" class="video"><img src="${value.url}" alt=""></a>
         `).join("")}
-        <div class="video_browser">
-            ${res.contents[random].video.map((value)=> /* html */`
-            <div class="information_video">        
-                <a href="view.html">${value.title}</a>
-                <p>${value.stats.views}</p>
-                <p>${value.publishedTimeText}</p>       
-            </div>`).join("")}
+}
+
+<div class="information_video">
+            <a href="#">${value.title}</a>
+            <p>${value.stats.views} Views &bull; ${value.publishedTimeText}</p>
         </div>
+
+
     </div>
     `);
 }
 listVideos();
+
+
+/*<div class="video_browser">
+            ${res.contents[random].video.map((value)=>  html `
+            <div class="information_video">        
+                <a href="view.html">${value.title}</a>
+                <p>${value.stats.views}</p>
+                <p>${value.publishedTimeText}</p>       
+            </div>).join("")}
+        </div>*/
+
+
+
+
+/* 
+
+        <div class="videos_main">
+            ${res.contents[random].video.thumbnails.map((value) => `
+                <a href="#" class="video"><img src="${value.url}" alt=""></a>    
+            `).join("")}
+        </div>
+        `);
+        selection.insertAdjacentHTML("beforeend",/* html `
+        <div class="information_videos">
+            ${res.contents[random].video.map((value) => `
+                <a href="#" class="title_video">${value.title}</a>
+            `).join("")}
+        </div>
+        `);    */

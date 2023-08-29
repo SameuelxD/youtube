@@ -220,20 +220,25 @@ body{
 .container_main .title_main{
     margin-bottom: 20px;
 }
-.container_main .videos_main{
+.container_main #list_videos{
     display: grid;
     gap: 40px 20px;
     grid-template-columns: repeat(auto-fit,minmax(min(100%,225px),1fr));
 }
-.container_main .videos_main .video{
+.container_main #list_videos .videos_main .video{
     width: 100%;
     display: flex;
 }
-.container_main .videos_main .video img{
+.container_main #list_videos .videos_main .video img{
     width: 100%;
     height: auto;
     object-fit: cover;
 }
+/*.container_main .information_videos{
+    display: grid;
+    gap: 40px 20px;
+    grid-template-columns: repeat(auto-fit,minmax(min(100%,225px),1fr));
+}*/
 @media screen and (max-width: 1200px) {
     .container_header .item_logo .logo span{
         display: none;
