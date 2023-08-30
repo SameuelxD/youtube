@@ -29,52 +29,27 @@ let buildAvatar=async()=>{
     `);
 }
 buildAvatar()
-/*async function listVideos() {
-    const [res1, res2] = await Promise.all([
-        fetch(`js/${path1}.json`).then(details => details.json()),
-        fetch(`js/${path2}.json`).then(videos => videos.json())
-    ]);
-
-    let selection = document.querySelector("#list_videos");
-
-    // Limpia el contenido existente en #list_videos
-    selection.innerHTML = "";
-
-    // Combina los resultados de res1 y res2 y mapea el contenido
-    let combinedData = res1.contents.concat(res2.contents);
-    let randomThumbnails = combinedData.map((values) => `
-         <div class="videos_main">
-            <a href="#" class="video"><img src="${values.video.thumbnails[3].url}" alt="videos"/></a>
-            <div class="information_videos">
-                    <a href="#" id="photo_channel"><img src="#" alt="videos"/></a>
-                    <a href="#" class="video_title">${values.video.title}</a>
-                    <a href="#" class="ch">CreativeCode</a>
-                    <a href="#" class="stats">${values.video.stats.views} views - ${values.video.publishedTimeText}</a>
-            </div> 
-        </div>
-    `).join("");
-
-    // Inserta los elementos en #list_videos
-    selection.insertAdjacentHTML("beforeend", randomThumbnails);
-}
-listVideos();*/
-
-
 
 
 
 async function listVideos() {
-    let petition1=await fetch(`js/${path1}.json`);
-    let res1=await petition1.json();
+    let petition1 = await fetch(`js/${path1}.json`);
+    let res1 = await petition1.json();
     let petition2 = await fetch(`js/${path2}.json`);
     let res2 = await petition2.json();
     let selection = document.querySelector("#list_videos");
-    
+
+    // Verifica si el elemento con ID "list_videos" existe
+    if (!selection) {
+        console.error("#list_videos no encontrado en el DOM");
+        return;
+    }
+
     // Limpia el contenido existente en #list_videos
     selection.innerHTML = "";
 
     // Obtiene un conjunto específico de miniaturas aleatorias
-    let randomThumbnails = res2.contents.map((values)=> `
+    let randomThumbnails = res2.contents.map((values) => `
          <div class="videos_main">
             <a href="view.html" class="video"><img src="${values.video.thumbnails[3].url}" alt="videos"/></a>
             <div class="information_videos">
@@ -84,87 +59,45 @@ async function listVideos() {
                     <a href="#" class="stats">${values.video.stats.views} views - ${values.video.publishedTimeText}</a>
             </div> 
         </div>
-
     `).join("");
-    //let randomTitle = res.contents[random].video;
 
-    // Construye los elementos HTML
-       
-    
     // Inserta los elementos en #list_videos
     selection.insertAdjacentHTML("beforeend", randomThumbnails);
-    //selection.insertAdjacentHTML("beforeend",titleVideos)
-}
 
-listVideos();
-/*async function playingVideo(){
-    let petition1=await fetch(`js/${path1}.json`);
-    let res1=await petition1.json();
-    let petition2 = await fetch(`js/${path2}.json`);
-    let res2 = await petition2.json();
-    let selection = document.querySelector("#playing_video");
+   
+
     
-    // Limpia el contenido existente en #list_videos
-    selection.innerHTML = "";
-
-    // Obtiene un conjunto específico de miniaturas aleatorias
-    let playing_video = res2.contents.video.videoId/* html 
-    let video= <div class="playing_video">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/izvodnnCvt0?si=q05MVhsSepC_QcKn" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    </div>
-        
-    selection.insertAdjacentHTML("beforeend", playing_video);       
 }
-playingVideo();*/
-
-/*let listVideos=async()=>{
-    let random=Math.floor(Math.random() * 20)
-    let petition=await fetch(`js/${path2}.json`);
-    let res=await petition.json();
-    let selection=document.querySelector("#list_videos");
-    selection.insertAdjacentHTML("beforeend", /* html  
-    <div class="videos_main">
-        ${res.contents[random].video.thumbnails.map((value) => html `
-        <a href="#" class="video"><img src="${value.url}" alt=""></a>
-        `).join("")}
-}
-
-<div class="information_video">
-            <a href="#">${value.title}</a>
-            <p>${value.stats.views} Views &bull; ${value.publishedTimeText}</p>
-        </div>
+document.addEventListener("DOMContentLoaded", function () {
+    listVideos();
+});
 
 
-    </div>
-    `);
-}
-listVideos();
+async function playingVideo(){
+    let petition1= await fetch(`js/${path1}.json`);
+    let petition2 = await fetch(`js/${path2}.json`);
+    let res1=await petition1.json();
+    let res2 = await petition2.json();
+    let selection= document.querySelector('#playing_video')
+    selection.insertAdjacentHTML("beforeend", /* html */ `
+        <iframe width="100%" height="450px" src="https://www.youtube.com/embed/izvodnnCvt0?si=0LEHxTMcnFagHCYY" class="playing_video" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+            <div class="description_video">    
+                <h2 class="title_playing">WebApi NetCore Part22</h2>
+                <div class="column1">
+                    <a href="#" id="avatar_channel"><img src="${res1.author.avatar[2].url}" alt="avatar"/></a>
+                    <h2>CreativeCode</h2>
+                    <h3>${res1.author.stats.subscribersText}</h3>
+                    <button class=btn_suscribirse>Suscribirse</button>
+                </div>
+                <div class="column2>
+                    <a href="#"><i class="fa-solid fa-thumbs-up"></i></a>                   
+                    <a href="#"><i class="fa-solid fa-thumbs-down"></i>
+                    <button class="share_v">Share</button>
 
+                </div>
+                
 
-/*<div class="video_browser">
-            ${res.contents[random].video.map((value)=>  html `
-            <div class="information_video">        
-                <a href="view.html">${value.title}</a>
-                <p>${value.stats.views}</p>
-                <p>${value.publishedTimeText}</p>       
-            </div>).join("")}
-        </div>*/
-
-
-
-
-/* 
-
-        <div class="videos_main">
-            ${res.contents[random].video.thumbnails.map((value) => `
-                <a href="#" class="video"><img src="${value.url}" alt=""></a>    
-            `).join("")}
-        </div>
+            </div>
         `);
-        selection.insertAdjacentHTML("beforeend",/* html `
-        <div class="information_videos">
-            ${res.contents[random].video.map((value) => `
-                <a href="#" class="title_video">${value.title}</a>
-            `).join("")}
-        </div>
-        `);    */
+}
+playingVideo(); 
